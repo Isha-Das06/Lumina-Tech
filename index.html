@@ -20,29 +20,26 @@
                 accent: '#00f0ff',
                 secondary: '#7000ff',
                 text: '#e0e0e0',
-                muted: '#5a5a6e'
+                muted: '#8892b0'
               }
             },
             fontFamily: {
               sans: ['Rajdhani', 'sans-serif'],
               display: ['Orbitron', 'sans-serif'],
+              mono: ['monospace'] // Fallback for tech aesthetic
             },
             animation: {
-              'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-              'glow': 'glow 2s ease-in-out infinite alternate',
+              'spin-slow': 'spin 10s linear infinite',
+              'pulse-fast': 'pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite',
             },
             keyframes: {
-              glow: {
-                '0%': { boxShadow: '0 0 5px #00f0ff' },
-                '100%': { boxShadow: '0 0 20px #00f0ff, 0 0 10px #7000ff' }
+              scan: {
+                '0%': { top: '0%' },
+                '100%': { top: '100%' },
               },
               marquee: {
                 '0%': { transform: 'translateX(0%)' },
-                '100%': { transform: 'translateX(-50%)' }
-              },
-              scan: {
-                '0%': { top: '0%' },
-                '100%': { top: '100%' }
+                '100%': { transform: 'translateX(-50%)' },
               }
             }
           }
@@ -50,17 +47,11 @@
       }
     </script>
     <style>
-      body {
-        background-color: #0a0a12;
-        color: #e0e0e0;
-        cursor: none; /* Hide default cursor for custom implementation */
+      /* Smooth scrolling */
+      html {
+        scroll-behavior: smooth;
       }
-      /* Re-enable default cursor for touch devices */
-      @media (hover: none) and (pointer: coarse) {
-        body {
-          cursor: auto;
-        }
-      }
+      /* Custom scrollbar */
       ::-webkit-scrollbar {
         width: 8px;
       }
@@ -74,29 +65,25 @@
       ::-webkit-scrollbar-thumb:hover {
         background: #00f0ff;
       }
-      .hide-scrollbar::-webkit-scrollbar {
-        display: none;
-      }
-      .hide-scrollbar {
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-      }
     </style>
   <script type="importmap">
 {
   "imports": {
-    "react": "https://aistudiocdn.com/react@^19.2.1",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
-    "react/": "https://aistudiocdn.com/react@^19.2.1/",
-    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0",
-    "framer-motion": "https://aistudiocdn.com/framer-motion@^12.23.25",
     "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.10.0",
-    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.31.0"
+    "framer-motion": "https://aistudiocdn.com/framer-motion@^12.23.25",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0",
+    "react/": "https://aistudiocdn.com/react@^19.2.1/",
+    "react": "https://aistudiocdn.com/react@^19.2.1",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.31.0",
+    "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.1.1",
+    "vite": "https://aistudiocdn.com/vite@^7.2.6",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/"
   }
 }
 </script>
 </head>
-  <body>
+  <body class="bg-lumina-dark text-white antialiased">
     <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
   </body>
 </html>

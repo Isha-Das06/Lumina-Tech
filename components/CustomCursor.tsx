@@ -6,13 +6,23 @@ export const CustomCursor: React.FC = () => {
   const [isHovering, setIsHovering] = useState(false);
 
   useEffect(() => {
+    // Hide default cursor only when this component is active
+    document.body.style.cursor = 'none';
+
     const updateMousePosition = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
 
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      if (target.tagName === 'A' || target.tagName === 'BUTTON' || target.closest('a') || target.closest('button')) {
+      if (
+        target.tagName === 'A' || 
+        target.tagName === 'BUTTON' || 
+        target.closest('a') || 
+        target.closest('button') ||
+        target.tagName === 'INPUT' ||
+        target.tagName === 'TEXTAREA'
+      ) {
         setIsHovering(true);
       } else {
         setIsHovering(false);
@@ -25,6 +35,7 @@ export const CustomCursor: React.FC = () => {
     return () => {
       window.removeEventListener('mousemove', updateMousePosition);
       window.removeEventListener('mouseover', handleMouseOver);
+      document.body.style.cursor = 'auto';
     };
   }, []);
 
